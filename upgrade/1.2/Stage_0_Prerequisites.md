@@ -7,7 +7,6 @@
 Stage 0 has several critical procedures which prepares and verify if the environment is ready for upgrade. First, the latest docs RPM is installed; it includes critical install scripts used in the upgrade procedure. Next, the current configuration of the System Layout Service (SLS) is updated to have necessary information for CSM 1.2. The management network configuration is also upgraded. Towards the end, prerequisite checks are performed to ensure that the upgrade is ready to proceed. Finally, a backup of Workload Manager configuration data and files is created. Once complete, the upgrade proceeds to Stage 1.
 
 **Stages**
-
    - [Stage 0.1 - Install latest docs RPM](#install-latest-docs)
    - [Stage 0.2 - Update SLS](#update-sls)
    - [Stage 0.3 - Upgrade Management Network](#update-management-network)
