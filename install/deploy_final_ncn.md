@@ -447,8 +447,8 @@ the Kubernetes cluster as the final of three master nodes, forming a quorum.
 1. Verify that there **is not** a metal bootstrap IP address.
 
     ```bash
-     ncn-m001# ip a show bond0
-     ```
+    ncn-m001# ip a show bond0
+    ```
 
 1. Verify zypper repositories are empty and all remote SUSE repositories are disabled.
 
