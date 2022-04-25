@@ -1,10 +1,8 @@
 # Dell Installation and Configuration Guide
 
-### Dell Supplemental Guide to Mellanox Installations
+## Dell Supplemental Guide to Mellanox Installations
 
 ![](../../../../img/network/management_network/intro.png)
-
-© 2021 Hewlett Packard Enterprise Development LP
 
 ## Introduction
 
@@ -14,7 +12,7 @@ The HPE Cray recommended way of configuring the network is with the CANU tool. T
 
 This guide also includes the currently documented and supported network scenarios.
 
-> **NOTE:** Not every configuration option is covered here, and for any configuration outside of the scope of this document, refer to the official Dell user manuals.
+> **NOTE:** Not every configuration option is covered here. For any configuration outside of the scope of this document, refer to the official Dell user manuals.
 
 Dell documentation and software can be found from:
 
@@ -25,14 +23,6 @@ This document is intended for network administrators and support personnel.
 __________________________________
 The display and command line illustrated in this document are examples and might not exactly match your particular environment. The switch and accessory drawings in this document are for illustration only, and may not exactly match your installed products.
 __________________________________
-
-# Table of Contents
-
-## Introduction
-
-   1. [Introduction](../index.md#introduction)
-   1. [Notice](../index.md)
-   1. [Index](../index.md)
 
 ## Managing Switches from CLI
 
@@ -90,4 +80,3 @@ __________________________________
 ### Factory Reset
 
   1. [Reset Configuration](./reset.md)
- 
