@@ -8,7 +8,6 @@ This document provides troubleshooting information for services and functionalit
     * [HMS Discovery job not creating RedfishEndpoints in Hardware State Manager](known_issues/discovery_job_not_creating_redfish_endpoints.md)
     * [initrd.img.xz not found](known_issues/initrd.img.zx_not_found.md) 
 ### Grafana Dashboards
-    
 * [Grafana Dashboards](../operations/system_management_health/Grafana_Dashboards_by_Component.md)
 * [Troubleshoot Grafana Dashboard](../operations/system_management_health/Troubleshoot_Grafana_Dashboard.md)
 ### Troubleshoot Topics
