@@ -9,7 +9,6 @@ This document provides troubleshooting information for services and functionalit
     * [initrd.img.xz not found](known_issues/initrd.img.zx_not_found.md) 
 ### Grafana Dashboards
 * [Grafana Dashboards](../operations/system_management_health/Grafana_Dashboards_by_Component.md)
-* [Troubleshoot Grafana Dashboard](../operations/system_management_health/Troubleshoot_Grafana_Dashboard.md)
 ### Troubleshoot Topics
  * Troubleshoot Kubernetes
     * [General Kubernetes Commands for Troubleshooting](kubernetes/Kubernetes_Troubleshooting_Information.md)
