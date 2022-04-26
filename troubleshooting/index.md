@@ -10,6 +10,8 @@ This document provides troubleshooting information for services and functionalit
 ### Grafana Dashboards
 * [Grafana Dashboards](../operations/system_management_health/Grafana_Dashboards_by_Component.md)
 ### Troubleshoot Topics
+ * [Grafana Dashboards](../operations/system_management_health/Grafana_Dashboards_by_Component.md)
+    * [Troubleshoot Grafana Dashboard](../operations/system_management_health/Troubleshoot_Grafana_Dashboard.md)
  * Troubleshoot Kubernetes
     * [General Kubernetes Commands for Troubleshooting](kubernetes/Kubernetes_Troubleshooting_Information.md)
     * [Kubernetes Log File Locations](kubernetes/Kubernetes_Log_File_Locations.md)
