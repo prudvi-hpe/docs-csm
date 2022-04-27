@@ -18,7 +18,7 @@ A Grafana dashboard is a powerful open source analytical and visualization tool 
 - Host Overview
 - Host Details
 - MDS Performance
-- OSD device details
+- OSD Device Details
 - OSD Overview
 - Pool Details
 - Pools Overview
