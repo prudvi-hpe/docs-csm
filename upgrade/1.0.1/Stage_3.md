@@ -3,7 +3,7 @@
 > NOTE: During the CSM-0.9 install the LiveCD containing the initial install files for this system should have been unmounted from the master node when rebooting into the Kubernetes cluster. The scripts run in this section will also attempt to unmount/eject it if found to ensure the USB stick does not get erased.
 
 >**`IMPORTANT:`**
-> 
+>
 > Reminder: Before running any upgrade scripts, be sure the Cray CLI output format is reset to default by running the following command:
 >
 >```bash
@@ -17,7 +17,7 @@
     ```bash
     ncn-m001# /usr/share/doc/csm/upgrade/1.0.1/scripts/upgrade/ncn-upgrade-k8s-master.sh ncn-m002
     ```
-    
+
     > NOTE: You may need to reset the root password for each node after it is rebooted
 
 1. Repeat the previous step for each other master node **excluding `ncn-m001`**, one at a time.
@@ -33,7 +33,7 @@
     ```bash
     ncn-m001# /usr/share/doc/csm/upgrade/1.0.1/scripts/upgrade/ncn-upgrade-k8s-worker.sh ncn-w001
     ```
-    
+
     > NOTE: You may need to reset the root password for each node after it is rebooted
 
 1. Repeat the previous step for each other worker node, one at a time.
@@ -60,23 +60,25 @@ For `ncn-m001`, use `ncn-m002` as the stable NCN. Use `vlan007`/CAN IP address t
 
         1. Install document RPM package:
 
+            > The install scripts will look for this RPM in `/root`, so it is important that you copy it there.
+
             ```bash
-            ncn-m002# wget https://storage.googleapis.com/csm-release-public/shasta-1.5/docs-csm/docs-csm-latest.noarch.rpm
-            ncn-m002# rpm -Uvh docs-csm-latest.noarch.rpm
+            ncn-m002# wget https://storage.googleapis.com/csm-release-public/shasta-1.5/docs-csm/docs-csm-latest.noarch.rpm -P /root
+            ncn-m002# rpm -Uvh --force /root/docs-csm-latest.noarch.rpm
             ```
 
         1. Set the `ENDPOINT` variable to the URL of the directory containing the CSM release tarball.
-        
+
             In other words, the full URL to the CSM release tarball will be `${ENDPOINT}${CSM_RELEASE}.tar.gz`
-        
+
             **NOTE** This step is optional for Cray/HPE internal installs.
-        
+
             ```bash
             ncn-m002# ENDPOINT=https://put.the/url/here/
             ```
 
         1. Run the script
-        
+
             **NOTE** The `--endpoint` argument is optional for Cray/HPE internal use.
 
             ```bash
@@ -87,14 +89,16 @@ For `ncn-m001`, use `ncn-m002` as the stable NCN. Use `vlan007`/CAN IP address t
 
         1. Copy the docs-csm RPM package and CSM release tarball to `ncn-m002`.
 
+            > The install scripts will look for the RPM in `/root`, so it is important that you copy it there.
+
         1. Install document RPM package:
 
             ```bash
-            ncn-m002# rpm -Uvh [PATH_TO_docs-csm-*.noarch.rpm]
+            ncn-m002# rpm -Uvh --force /root/docs-csm-*.noarch.rpm
             ```
 
         1. Set the `TAR_DIR` variable to the directory on `ncn-m002` containing the CSM release tarball.
-        
+
             In other words, the full path to the CSM release tarball will be `${TAR_DIR}/${CSM_RELEASE}.tar.gz`
 
             ```bash
@@ -128,7 +132,10 @@ After the above command has completed and pods have been restarted, execute the 
 
 ```bash
 ncn-m002# for i in `seq 3`; do echo "ncn-m00$i:"; kubectl get po -n kube-system kube-apiserver-ncn-m00${i} -o json | jq '.spec.containers[].image';   kubectl get po -n kube-system kube-controller-manager-ncn-m00${i} -o json | jq '.spec.containers[].image';   kubectl get po -n kube-system kube-scheduler-ncn-m00${i} -o json | jq '.spec.containers[].image'; done
+```
 
+Output should look like:
+```text
 ncn-m001:
 "k8s.gcr.io/kube-apiserver:v1.19.9"
 "docker.io/cray/kube-controller-manager:v1.19.9"

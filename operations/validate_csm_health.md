@@ -36,6 +36,7 @@ The areas should be tested in the order they are listed on this page. Errors in 
   - [3 Software Management Services Health Checks](#sms-health-checks)
     - [3.1 SMS Test Execution](#sms-checks)
     - [3.2 Interpreting cmsdev Results](#cmsdev-results)
+    - [3.3 Known Issues](#sms-checks-known-issues)
   - [4. Booting CSM Barebones Image](#booting-csm-barebones-image)
     - [4.1 Locate CSM Barebones Image in IMS](#locate-csm-barebones-image-in-ims)
     - [4.2 Create a BOS Session Template for the CSM Barebones Image](#csm-bos-session-template)
@@ -173,7 +174,7 @@ Execute ncnPostgresHealthChecks script and analyze the output of each individual
       1. Verify there are three cluster members (with the exception of sma-postgres-cluster where there should be only two cluster members).
       If the number of cluster members is not correct, refer to [Troubleshoot Postgres Database](./kubernetes/Troubleshoot_Postgres_Database.md#missing).
 
-      2. Verify there is one cluster member with the Leader Role. 
+      2. Verify there is one cluster member with the Leader Role.
       If there is no Leader, refer to [Troubleshoot Postgres Database](./kubernetes/Troubleshoot_Postgres_Database.md#leader).
 
       3. Verify the State of each cluster member is 'running'.
@@ -434,6 +435,7 @@ Run the NCN health checks against the three different types of nodes with the fo
 
 **IMPORTANT:** These tests should only be run while booted into the PIT node. Do not run these as part of upgrade testing. This includes the Kubernetes check in the next block.
 
+**IMPORTANT:** It is possible that the first pass of running these tests may fail due to could-init not being completed on the storage nodes. In this case please wait 5 minutes and re-run the tests.
 
 ```bash
 pit# /opt/cray/tests/install/ncn/automated/ncn-healthcheck-master
@@ -457,11 +459,11 @@ pit# /opt/cray/tests/install/ncn/automated/ncn-kubernetes-checks
   - Because of a [known issue](https://github.com/vmware-tanzu/velero/issues/1980) with Velero, a backup may be attempted immediately upon the deployment of a backup schedule (for example, vault). It may be necessary to delete backups from a Kubernetes node to clear this situation. For example:
      1. Run the following to find the failed backup.
         ```bash
-        ncn# kubectl get backups -A -o json | jq -e ‘.items[] | select(.status.phase == “PartiallyFailed”) | .metadata.name’
+        ncn# kubectl get backups -A -o json | jq -e '.items[] | select(.status.phase == "PartiallyFailed") | .metadata.name'
         ```
-     1. Delete the backup, where <backup> is replaced with a backup returned in the previous step.
+     1. Delete the backup, where `<backup>` is replaced with a backup returned in the previous step.
         ```bash
-        ncn# kubectl delete backups <backup> -n velero
+        ncn# velero backup delete <backup> --confirm
         ```
 
 <a name="check-of-system-management-monitoring-tools"></a>
@@ -547,9 +549,9 @@ ALL OK
 #### 2.2.1 Interpreting results
 
 Both sections `BMCs in SLS not in HSM components` and `BMCs in SLS not in HSM Redfish Endpoints` have the same format for mismatches between SLS and HSM. Each row starts with the xname of the BMC. If the BMC does not have an associated `MgmtSwitchConnector` in SLS, then `# No mgmt port association` will be displayed alongside the BMC xname.
-> MgmtSwitchConnectors in SLS are used to represent the switch port on a leaf switch that an the BMC of an air cooled device is connected to.
+> `MgmtSwitchConnector`s in SLS are used to represent the switch port on a leaf switch that is connected to the BMC of an air-cooled device.
 
-```bash
+```
 =============== BMCs in SLS not in HSM components ===============
 x3000c0s1b0  # No mgmt port association
 ```
@@ -562,16 +564,16 @@ __For each__ of the BMCs that show up in either of mismatch lists use the follow
    >   jq '.[] | { Xname: .Xname, Aliases: .ExtraProperties.Aliases }' -c
    > ```
 
-   Example mismatch for the BMC of ncn-m001:
+   Example mismatch for the BMC of `ncn-m001`:
    ```bash
    =============== BMCs in SLS not in HSM components ===============
    x3000c0s1b0  # No mgmt port association
    ```
 
-* The node BMCs for HPE Apollo XL645D nodes may report as a mismatch depending on the state of the system when the `hsm_discovery_verify.sh` script is run. If the system is currently going through the process of installation, then this is an expected mismatch as the [Prepare Compute Nodes](../install/prepare_compute_nodes.md) procedure required to configure the BMC of the HPE Apollo 6500 XL645D node may not have been completed yet. 
+* The node BMCs for HPE Apollo XL645D nodes may report as a mismatch depending on the state of the system when the `hsm_discovery_verify.sh` script is run. If the system is currently going through the process of installation, then this is an expected mismatch as the [Prepare Compute Nodes](../install/prepare_compute_nodes.md) procedure required to configure the BMC of the HPE Apollo 6500 XL645D node may not have been completed yet.
    > For more information refer to [Configure HPE Apollo 6500 XL645d Gen10 Plus Compute Nodes](../install/prepare_compute_nodes.md#configure-hpe-apollo-6500-x645d-gen10-plus-compute-nodes) for additional required configuration for this type of BMC.
 
-   Example mismatch for the BMC of a HPE Apollo XL654D:
+   Example mismatch for the BMC of an HPE Apollo XL654D:
    ```bash
    =============== BMCs in SLS not in HSM components ===============
    x3000c0s30b1
@@ -581,7 +583,7 @@ __For each__ of the BMCs that show up in either of mismatch lists use the follow
    ```
 
 * Chassis Management Controllers (CMC) may show up as not being present in HSM. CMCs for Intel node blades can be ignored. Gigabyte node blade CMCs not found in HSM is not normal and should be investigated. If a Gigabyte CMC is expected to not be connected to the HMN network, then it can be ignored.
-   > CMCs have xnames in the form of `xXc0sSb999`, where `X` is the cabinet and `S` is the rack U of the compute node chassis.
+   > CMCs have component names (xnames) in the form of `xXc0sSb999`, where `X` is the cabinet and `S` is the rack U of the compute node chassis.
 
    Example mismatch for a CMC an Intel node blade:
    ```bash
@@ -593,7 +595,7 @@ __For each__ of the BMCs that show up in either of mismatch lists use the follow
    ```
 
 * HPE PDUs are not supported at this time and will likely show up as not being found in HSM. They can be ignored.
-   > Cabinet PDU Controllers have xnames in the form of `xXmM`, where `X` is the cabinet and `M` is the ordinal of the Cabinet PDU Controller.
+   > Cabinet PDU Controllers have component names (xnames) in the form of `xXmM`, where `X` is the cabinet and `M` is the ordinal of the Cabinet PDU Controller.
 
    Example mismatch for HPE PDU:
    ```bash
@@ -666,6 +668,19 @@ If one or more checks failed:
         ```
 
 Additional test execution details can be found in `/opt/cray/tests/cmsdev.log`.
+
+<a name="sms-checks-known-issues"></a>
+### 3.3 Known Issues
+
+#### Failed To Create VCS Organization
+
+On a fresh install, it is possible that `cmsdev` reports an error similar to the following:
+```text
+ERROR (run tag zl7ak-vcs): POST https://api-gw-service-nmn.local/vcs/api/v1/orgs: expected status code 201, got 401
+ERROR (run tag zl7ak-vcs): Failed to create vcs organization
+```
+
+In this case, follow the [Gitea/VCS 401 Errors](../troubleshooting/known_issues/gitea_vcs_401_errors.md) troubleshooting procedure.
 
 <a name="booting-csm-barebones-image"></a>
 ## 4. Booting CSM Barebones Image

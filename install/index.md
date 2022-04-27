@@ -11,25 +11,25 @@ the installation of CSM software and nodes can be validated with health checks b
 like the check and update of firmware on system components or the preparation of compute nodes.
 Once the CSM installation has completed, other product streams for the HPE Cray EX system can be installed.
 
-### Topics:
+## Topics
 
-   1. [Validate Management Network Cabling](#validate_management_network_cabling)
-   1. [Prepare Configuration Payload](#prepare_configuration_payload)
-   1. [Prepare Management Nodes](#prepare_management_nodes)
-   1. [Bootstrap PIT Node](#bootstrap_pit_node)
-   1. [Configure Management Network Switches](#configure_management_network)
-   1. [Collect MAC Addresses for NCNs](#collect_mac_addresses_for_ncns)
-   1. [Deploy Management Nodes](#deploy_management_nodes)
-   1. [Install CSM Services](#install_csm_services)
-   1. [Validate CSM Health Before PIT Node Redeploy](#validate_csm_health_before_pit_redeploy)
-   1. [Redeploy PIT Node](#redeploy_pit_node)
-   1. [Configure Administrative Access](#configure_administrative_access)
-   1. [Validate CSM Health](#validate_csm_health)
-   1. [Configure Prometheus Alert Notifications](#configure_prometheus_alert_notifications)
-   1. [Update Firmware with FAS](#update_firmware_with_fas)
-   1. [Prepare Compute Nodes](#prepare_compute_nodes)
-   1. [Next Topic](#next_topic)
-   1. [Troubleshooting Installation Problems](#troubleshooting_installation)
+1. [Validate Management Network Cabling](#validate_management_network_cabling)
+1. [Prepare Configuration Payload](#prepare_configuration_payload)
+1. [Prepare Management Nodes](#prepare_management_nodes)
+1. [Bootstrap PIT Node](#bootstrap_pit_node)
+1. [Configure Management Network Switches](#configure_management_network)
+1. [Collect MAC Addresses for NCNs](#collect_mac_addresses_for_ncns)
+1. [Deploy Management Nodes](#deploy_management_nodes)
+1. [Install CSM Services](#install_csm_services)
+1. [Validate CSM Health Before PIT Node Redeploy](#validate_csm_health_before_pit_redeploy)
+1. [Redeploy PIT Node](#redeploy_pit_node)
+1. [Configure Administrative Access](#configure_administrative_access)
+1. [Validate CSM Health](#validate_csm_health)
+1. [Configure Prometheus Alert Notifications](#configure_prometheus_alert_notifications)
+1. [Update Firmware with FAS](#update_firmware_with_fas)
+1. [Prepare Compute Nodes](#prepare_compute_nodes)
+1. [Next Topic](#next_topic)
+1. [Troubleshooting Installation Problems](#troubleshooting_installation)
 
 The topics in this chapter need to be done as part of an ordered procedure so are shown here with numbered topics.
 
@@ -144,7 +144,7 @@ sections, but there is also a general troubleshooting topic.
 
    1. Validate CSM Health Before PIT Node Redeploy
 
-      After installing all of the CSM services, now validate the health of the management nodes and all CSM services. 
+      After installing all of the CSM services, now validate the health of the management nodes and all CSM services.
       The reason to do it now is that if there are any problems detected with the core infrastructure or the nodes, it is
       easy to rewind the installation to [Deploy Management Nodes](#deploy_management_nodes) because the PIT node has not
       yet been redeployed. In addition, redeploying the PIT node successfully requires several CSM services to be working
@@ -216,7 +216,7 @@ sections, but there is also a general troubleshooting topic.
       with many devices on the system. FAS can be used to update the firmware for all of the devices it
       communicates with at once, or specific devices can be targeted for a firmware update.
 
-      >**IMPORTANT:** 
+      >**IMPORTANT:**
       Before FAS can be used to update firmware, refer to the 1.5 _HPE Cray EX System Software Getting Started Guide S-8000_
       on the HPE Customer Support Center at https://www.hpe.com/support/ex-gsg for information about how to install
       the HPE Cray EX HPC Firmware Pack (HFP) product. The installation of HFP will inform FAS of the newest firmware
@@ -232,7 +232,7 @@ sections, but there is also a general troubleshooting topic.
 
       These compute node types require preparation.
          * HPE Apollo 6500 XL645d Gen10 Plus
-         * Gigabyte 
+         * Gigabyte
 
       See [Prepare Compute Nodes](prepare_compute_nodes.md)
    <a name="next_topic"></a>

@@ -23,6 +23,7 @@
 # OTHER DEALINGS IN THE SOFTWARE.
 #
 
+
 DEPLOYMENTS="\
 cray-bss \
 cray-keycloak-gatekeeper-ingress \
@@ -78,12 +79,33 @@ function wait_for_running_pods() {
     current_running_num=$(kubectl get po -n $ns | grep $etcd_cluster | grep Running | wc -l)
     if [[ "$desired_size" -eq "$current_running_num" ]]; then
       echo "Found $desired_size running pods in $etcd_cluster etcd cluster"
+      while true; do
+        operator_num_ready=$(kubectl get etcd $etcd_cluster -n $ns -o jsonpath='{.status.members.ready}' | jq .[] | wc -l)
+        if [[ "$desired_size" -eq "$operator_num_ready" ]]; then
+          echo "Found $desired_size ready members in $etcd_cluster etcd cluster"
+          op_state=$(kubectl get etcd $etcd_cluster -n $ns -o jsonpath='{.status.phase}')
+          if [ $op_state == "Running" ]; then
+            echo "Found status of $op_state for $etcd_cluster etcd cluster"
+            break
+          fi
+        fi
+        echo "Sleeping for ten seconds waiting for $desired_size ready members and 'Running' state for $etcd_cluster etcd cluster"
+        sleep 10
+      done
       break
     fi
     echo "Sleeping for ten seconds waiting for $desired_size pods in $etcd_cluster etcd cluster"
     sleep 10
   done
 }
+
+# Ensure etcd clusters have three running members before proceeding
+for etcdcluster in $ETCDCLUSTERS; do
+  ns=$(kubectl get etcdcluster -A | grep " $etcdcluster " | awk '{print $1}')
+  if [ ! -z "$ns" ]; then
+    wait_for_running_pods $ns $etcdcluster 3
+  fi
+done
 
 function restart_etcd_pods() {
   ns=$1
