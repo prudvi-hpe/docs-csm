@@ -26,7 +26,7 @@ A Grafana dashboard is a powerful open source analytical and visualization tool 
 - RGW Instance Detail
 - RGW Overview
 
-### CoreDNS Dashboard
+### CoreDNS
 
 - CoreDNS
 
