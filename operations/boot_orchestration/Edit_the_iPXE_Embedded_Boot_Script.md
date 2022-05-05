@@ -16,7 +16,7 @@ This procedure requires administrative privileges.
 
     ```bash
     ncn-m001# kubectl get configmap -n services cray-ipxe-bss-ipxe \
-    -o yaml > /root/k8s/cray-ipxe-bss-ipxe-backup.yaml
+    -o yaml > /root/cray-ipxe-bss-ipxe-backup.yaml
     ```
 
     Administrators can add, remove, or reorder sections in the ConfigMap related to the interface being used.
@@ -50,13 +50,13 @@ This procedure requires administrative privileges.
 
             ```bash
             ncn-m001# kubectl get configmap -n services cray-ipxe-bss-ipxe \
-            -o yaml > /root/k8s/cray-ipxe-bss-ipxe.yaml
+            -o yaml > /root/cray-ipxe-bss-ipxe.yaml
             ```
 
         2.  Edit the cray-ipxe-bss-ipxe.yaml file.
 
             ```bash
-            ncn-m001# vi /root/k8s/cray-ipxe-bss-ipxe.yaml
+            ncn-m001# vi /root/cray-ipxe-bss-ipxe.yaml
             ```
 
         3.  Reload the ConfigMap.
@@ -65,7 +65,7 @@ This procedure requires administrative privileges.
 
             ```bash
             ncn-m001# kubectl delete configmap -n services cray-ipxe-bss-ipxe
-            ncn-m001# kubectl create -f /root/k8s/cray-ipxe-bss-ipxe.yaml
+            ncn-m001# kubectl create -f /root/cray-ipxe-bss-ipxe.yaml
             ```
 
 2.  Delete the iPXE pod to ensure the updated ConfigMap will be used.
