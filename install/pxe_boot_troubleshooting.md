@@ -8,7 +8,7 @@ This page is designed to cover various issues that arise when trying to PXE boot
     - [Aruba Configuration](#aruba-configuration)
     - [Mellanox Configuration](#mellanox-configuration)
   - [Next steps](#next-steps)
-    - [Node iPXE retries and NIC order](#pxe-nic-boot-order)
+    - [Node iPXE Retries and NIC Order](#pxe-nic-boot-order)
     - [Restart BSS](#restart-bss)
     - [Restart KEA](#restart-kea)
     - [Missing BSS Data](#missing-bss-data)
