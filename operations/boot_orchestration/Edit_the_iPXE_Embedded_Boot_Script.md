@@ -53,7 +53,7 @@ This procedure requires administrative privileges.
             -o yaml > /root/cray-ipxe-bss-ipxe.yaml
             ```
 
-        2.  Edit the cray-ipxe-bss-ipxe.yaml file.
+        2.  Edit the `cray-ipxe-bss-ipxe.yaml` file.
 
             ```bash
             ncn-m001# vi /root/cray-ipxe-bss-ipxe.yaml
