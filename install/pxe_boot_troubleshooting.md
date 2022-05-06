@@ -244,6 +244,7 @@ To successfully PXE boot nodes, the following is required:
 If the configuration looks good and PXE boot is still not working, then there are some other things to try.
 
 <a name="pxe-nic-boot-order"></a>
+
 ### Node iPXE Retries and NIC Order
 
 In some environments, during the [Deploy Final NCN reboot step](deploy_final_ncn.md#4-reboot), `ncn-m001` may loop through all of its NICs and still fail to PXE boot,
