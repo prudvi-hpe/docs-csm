@@ -171,7 +171,7 @@ In order to restore the default CSM keys, there are two options:
         ncn# kubectl delete secret -n services csm-private-key
         ```
 
-    1. Delete the `csm-public-key` Kubernetes configmap.
+    1. Delete the `csm-public-key` Kubernetes ConfigMap.
 
         ```bash
         ncn# kubectl delete configmap -n services csm-public-key
