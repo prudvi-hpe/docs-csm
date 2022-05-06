@@ -50,7 +50,7 @@ This procedure requires administrative privileges.
 
             ```bash
             ncn-m001# kubectl get configmap -n services cray-ipxe-bss-ipxe \
-            -o yaml > /root/cray-ipxe-bss-ipxe.yaml
+                    -o yaml > /root/cray-ipxe-bss-ipxe.yaml
             ```
 
         2.  Edit the `cray-ipxe-bss-ipxe.yaml` file.
