@@ -241,7 +241,7 @@ To successfully PXE boot nodes, the following is required:
 <a name="#next-steps"></a>
 ## Next steps
 
-If the configuration looks good, and PXE boot is still not working, there are some other things to try.
+If the configuration looks good and PXE boot is still not working, then there are some other things to try.
 
 <a name="pxe-nic-boot-order"></a>
 ### Node iPXE Retries and NIC Order
