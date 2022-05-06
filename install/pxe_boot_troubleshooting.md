@@ -246,7 +246,11 @@ If the configuration looks good, and PXE boot is still not working, there are so
 <a name="pxe-nic-boot-order"></a>
 ### Node iPXE retries and NIC order
 
-In some environments you may find that ncn-m001 will be looping through all the NICs and still failing to PXE boot after the 3rd Chain attempt during the [Deploy Final NCN reboot step](https://github.com/Cray-HPE/docs-csm/blob/release/1.2/install/deploy_final_ncn.md#4-reboot). The order of NICs used by default is designed to be optimal for multiple types of hardware and cabling, but may need to be edited for your environment to reduce the time to boot ncn-m001. If so, follow the steps in the [Edit the iPXE Embedded Boot Script procedure](https://github.com/Cray-HPE/docs-csm/blob/release/1.2/operations/boot_orchestration/Edit_the_iPXE_Embedded_Boot_Script.md) to adjust the order of NICs used such that net0, or others, come before net2. If that does not resolve the issue, return to this PXE Boot Troubleshooting page.
+In some environments, during the [Deploy Final NCN reboot step](deploy_final_ncn.md#4-reboot), `ncn-m001` may loop through all of its NICs and still fail to PXE boot,
+even after the 3rd chain attempt. The NIC boot ordering used by default is designed to be optimal for multiple types of hardware and cabling, but it may need to be
+edited for specific environments in order to reduce the boot time of `ncn-m001`. If the boot issues described above are observed, then follow the steps in the
+[Edit the iPXE Embedded Boot Script procedure](../operations/boot_orchestration/Edit_the_iPXE_Embedded_Boot_Script.md), adjusting the NIC boot order such that `net0`,
+or others, come before `net2`. If that does not resolve the issue, then return to this PXE Boot Troubleshooting page.
 
 <a name="restart-bss"></a>
 ### Restart BSS
