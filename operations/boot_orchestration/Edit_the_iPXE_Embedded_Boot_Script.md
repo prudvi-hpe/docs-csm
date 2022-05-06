@@ -16,7 +16,7 @@ This procedure requires administrative privileges.
 
     ```bash
     ncn-m001# kubectl get configmap -n services cray-ipxe-bss-ipxe \
-    -o yaml > /root/cray-ipxe-bss-ipxe-backup.yaml
+            -o yaml > /root/cray-ipxe-bss-ipxe-backup.yaml
     ```
 
     Administrators can add, remove, or reorder sections in the ConfigMap related to the interface being used.
