@@ -165,7 +165,7 @@ Fetch the base installation CSM tarball, extract it, and install the contained C
 
 ## 2. Create the Bootable Media
 
-Cray Site Init will create the bootable LiveCD. Before creating the media, identify
+Cray `site-init` will create the bootable LiveCD. Before creating the media, identify
 which device will be used for it.
 
 1. Identify the USB device.
@@ -194,7 +194,7 @@ which device will be used for it.
     linux# USB=/dev/sd<disk_letter>
     ```
 
-1. Format the USB device.
+2. Format the USB device.
 
     * On Linux, use the CSI application to do this:
 
@@ -226,7 +226,7 @@ which device will be used for it.
 
     > **Note:** At this point, the USB device is usable in any server with a CPU with x86_64 architecture. The remaining steps help add the installation data and enable SSH on boot.
 
-1. Mount the configuration and persistent data partitions.
+3. Mount the configuration and persistent data partitions.
 
     ```bash
     linux# mkdir -pv /mnt/cow ${PITDATA} &&
@@ -235,7 +235,7 @@ which device will be used for it.
            mkdir -pv ${PITDATA}/configs ${PITDATA}/prep/{admin,logs} ${PITDATA}/data/{ceph,k8s}
     ```
 
-1. Copy and extract the tarball into the USB.
+4. Copy and extract the tarball into the USB.
 
     ```bash
     linux# cp -v ${CSM_PATH}.tar.gz ${PITDATA} &&
@@ -249,12 +249,12 @@ on to the [configuration payload](#configuration-payload).
 
 ## 3. Configuration Payload
 
-The SHASTA-CFG structure and other configuration files will be prepared, then `csi` will generate a system-unique configuration payload. This payload will be used
+The `SHASTA-CFG` structure and other configuration files will be prepared, then `csi` will generate a system-unique configuration payload. This payload will be used
 for the rest of the CSM installation on the USB device.
 
 1. [Generate Installation Files](#generate-installation-files)
 1. [Verify and Backup `system_config.yaml`](#verify-csi-versions-match)
-1. [Prepare Site Init](#prepare-site-init)
+1. [Prepare `site-init`](#prepare-site-init)
 
 <a name="generate-installation-files"></a>
 
@@ -463,11 +463,11 @@ information for this system has not yet been prepared.
 
 1. Copy the new `system_config.yaml` file somewhere safe to facilitate re-installs.
 
-1. Continue to the next step to [Prepare Site Init](#prepare-site-init).
+1. Continue to the next step to [Prepare `site-init`](#prepare-site-init).
 
 <a name="prepare-site-init"></a>
 
-### 3.3 Prepare Site Init
+### 3.3 Prepare `site-init`
 
 > **Note:**: It is assumed at this point that `$PITDATA` (that is, `/mnt/pitdata`) is still mounted on the Linux system. This is important because the following procedure
 > depends on that mount existing.
@@ -480,7 +480,7 @@ information for this system has not yet been prepared.
 
 1. Prepare the `site-init` directory.
 
-   Perform the [Prepare Site Init](prepare_site_init.md) procedures.
+   Perform the [Prepare `site-init`](prepare_site_init.md) procedures.
 
 <a name="prepopulate-livecd-daemons-configuration-and-ncn-artifacts"></a>
 
@@ -703,7 +703,7 @@ On first log in (over SSH or at local console), the LiveCD will prompt the admin
    need to mount this manually by running the following command.
 
    > **Note:** When creating the USB PIT image, this was mounted over `/mnt/pitdata`. Now that the USB PIT is booted,
-   > it will mount over `/var/www/ephemeral`. The FSLabel `PITDATA` is already in `/etc/fstab`, so the path is omitted
+   > it will mount over `/var/www/ephemeral`. The `FSLabel` value `PITDATA` is already in `/etc/fstab`, so the path is omitted
    > in the following call to `mount`.
 
    ```bash

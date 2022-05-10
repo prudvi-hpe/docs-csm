@@ -387,7 +387,7 @@ the Kubernetes cluster as the final of three master nodes, forming a quorum.
 
 1. Run `kubectl get nodes` to see the full Kubernetes cluster.
 
-    > **NOTE:** If the new node fails to join the cluster after running other cloud-init items, refer to the `handoff`.
+    > **NOTE:** If the new node fails to join the cluster after running other `cloud-init` items, refer to the `handoff`.
 
     ```bash
     ncn-m001# kubectl get nodes
@@ -423,7 +423,7 @@ the Kubernetes cluster as the final of three master nodes, forming a quorum.
        addr:     ipv4 172.30.53.88/20 [static]
     ```
 
-1. Run `ip a` to show the lan0 IP address; verify the site link.
+1. Run `ip a` to show the `lan0` IP address; verify the site link.
 
     ```bash
     ncn-m001# ip a show lan0

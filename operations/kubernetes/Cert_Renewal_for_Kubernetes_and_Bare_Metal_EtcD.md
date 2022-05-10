@@ -4,9 +4,9 @@ As part of the installation, Kubernetes generates certificates for the required 
 
 **IMPORTANT:**
 
-   - Depending on the version of Kubernetes, the command may or may not reside under the `alpha` category. Use `kubectl certs --help` and `kubectl alpha certs --help` to determine this. The overall command syntax should be the same and this is just whether or not the command structure will require `alpha` in it.
-   - The node referenced in this document as `ncn-m` is the master node selected to renew the certificates on.
-   - This document is based off a base hardware configuration of three master nodes and three worker nodes. Utility storage nodes are not mentioned because they are not running Kubernetes. Please make sure to update any commands that run on multiple nodes accordingly.
+* Depending on the version of Kubernetes, the command may or may not reside under the `alpha` category. Use `kubectl certs --help` and `kubectl alpha certs --help` to determine this. The overall command syntax should be the same and this is just whether or not the command structure will require `alpha` in it.
+* The node referenced in this document as `ncn-m` is the master node selected to renew the certificates on.
+* This document is based off a base hardware configuration of three master nodes and three worker nodes. Utility storage nodes are not mentioned because they are not running Kubernetes. Please make sure to update any commands that run on multiple nodes accordingly.
 
 ## File Locations
 
@@ -14,7 +14,7 @@ As part of the installation, Kubernetes generates certificates for the required 
 
 Services (master nodes):
 
-```
+```text
 /etc/kubernetes/pki/apiserver.crt
 /etc/kubernetes/pki/apiserver-etcd-client.crt
 /etc/kubernetes/pki/apiserver-etcd-client.key
@@ -41,7 +41,7 @@ Services (master nodes):
 
 Client (master and worker nodes):
 
-```
+```text
 /var/lib/kubelet/pki/kubelet-client-2021-09-07-17-06-36.pem
 /var/lib/kubelet/pki/kubelet-client-current.pem
 /var/lib/kubelet/pki/kubelet.crt
@@ -60,7 +60,7 @@ Client (master and worker nodes):
 
     Example output:
 
-    ```
+    ```text
     WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
 
     CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
@@ -91,7 +91,7 @@ Client (master and worker nodes):
 
     Example output:
 
-    ```
+    ```text
     ncn-m001: tar: Removing leading / from member names
     ncn-m001: /etc/kubernetes/pki/
     ncn-m001: /etc/kubernetes/pki/front-proxy-client.key
@@ -112,7 +112,7 @@ Client (master and worker nodes):
 
     Example output:
 
-    ```
+    ```text
     ncn-w003: tar: Removing leading / from member names
     ncn-w003: /var/lib/kubelet/pki/
     ncn-w003: /var/lib/kubelet/pki/kubelet.key
@@ -134,7 +134,7 @@ Run the following steps on each master node.
 
     Example output:
 
-    ```
+    ```text
     WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
     certificate embedded in the kubeconfig file for the admin to use and for kubeadm itself renewed
     certificate for serving the Kubernetes API renewed
@@ -156,7 +156,7 @@ Run the following steps on each master node.
 
     Example output:
 
-    ```
+    ```text
     WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
     CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
     admin.conf                 Sep 22, 2022 17:13 UTC   364d                                    no
@@ -184,7 +184,7 @@ Run the following steps on each master node.
 
     Example output:
 
-    ```
+    ```text
     -rw-r--r-- 1 root root 1249 Sep 22 17:13 apiserver.crt
     -rw-r--r-- 1 root root 1090 Sep 22 17:13 apiserver-etcd-client.crt
     -rw------- 1 root root 1675 Sep 22 17:13 apiserver-etcd-client.key
@@ -202,13 +202,13 @@ Run the following steps on each master node.
     -rw------- 1 root root  451 Sep 21 20:50 sa.pub
     ```
 
-    ```
+    ```text
     ncn-m# ls -l /etc/kubernetes/pki/etcd
     ```
 
     Example output:
 
-    ```
+    ```text
     -rw-r--r-- 1 root root 1017 Sep 21 20:50 ca.crt
     -rw-r--r-- 1 root root 1675 Sep 21 20:50 ca.key
     -rw-r--r-- 1 root root 1094 Sep 22 17:13 healthcheck-client.crt
@@ -244,7 +244,7 @@ Run the following steps on each master node.
 
    Example output:
 
-   ```
+   ```text
    /etc/kubernetes/pki/apiserver.crt
    notAfter=Sep 22 17:13:28 2022 GMT
    /etc/kubernetes/pki/apiserver-etcd-client.crt
@@ -274,18 +274,19 @@ Run the following steps on each master node.
    ```
 
    **IMPORTANT:** Do **NOT** forget to verify certificates in /etc/kubernetes/pki/etcd.
-   - As noted in the above output, all certificates including those for etcd were updated. Please note `apiserver-etcd-client.crt` is a Kubernetes api cert not an etcd only cert. Also, the `/var/lib/kubelet/pki/` certificates will be updated in the Kubernetes client section that follows.
+   * As noted in the above output, all certificates including those for etcd were updated. Please note `apiserver-etcd-client.crt` is a Kubernetes api cert not an etcd only cert. Also, the `/var/lib/kubelet/pki/` certificates will be updated in the Kubernetes client section that follows.
 
-1. Restart etcd.
+1. Restart `etcd`.
 
    Once the steps to renew the needed certs have been completed on all the master nodes, log into each master node one at a time and run the following:
 
    ```bash
    ncn-m# systemctl restart etcd.service
    ```
+
 **Run the remaining steps on both master and worker nodes.**
 
-1. Restart kubelet.
+1. Restart `kubelet`.
 
    Run the following command on each Kubernetes node.
 
@@ -307,25 +308,25 @@ Run the following steps on each master node.
 
       The following is returned if certificates have expired:
 
-      ```
+      ```text
       error: You must be logged in to the server (Unauthorized)
       ```
 
-   1. Copy /etc/kubernetes/admin.conf to /root/.kube/config.
+   1. Copy `/etc/kubernetes/admin.conf` to `/root/.kube/config`.
 
-      ```
+      ```bash
       ncn-m# cp /etc/kubernetes/admin.conf /root/.kube/config
       ```
 
    1. Check the status of the nodes again.
 
-      ```
+      ```bash
       ncn-m# kubectl get nodes
       ```
 
       Example output:
 
-      ```
+      ```text
       NAME       STATUS   ROLES    AGE    VERSION
       ncn-m001   Ready    master   370d   v1.18.6
       ncn-m002   Ready    master   370d   v1.18.6
@@ -335,23 +336,22 @@ Run the following steps on each master node.
       ncn-w003   Ready    <none>   370d   v1.18.6
       ```
 
-2. Distribute the client certificate to the rest of the cluster.
+1. Distribute the client certificate to the rest of the cluster.
 
-   **NOTE:** There may be errors when copying files. The target may or may not exist depending on the version of Shasta.
+   **NOTE:** There may be errors when copying files. The target may or may not exist depending on the version of CSM.
 
-   - **DO NOT** copy this to the master node where this work is being performed.
-   - Copy `/etc/kubernetes/admin.conf` to all master and worker nodes.
+   * **DO NOT** copy this to the master node where this work is being performed.
+   * Copy `/etc/kubernetes/admin.conf` to all master and worker nodes.
 
    Client access:
 
    **NOTE:** Update the following command with the appropriate amount of worker nodes.
 
-   ```
+   ```bash
    ncn-m# pdcp -w ncn-m00[2-3] -w ncn-w00[1-3] /etc/kubernetes/admin.conf /etc/kubernetes/
    ```
 
-
-## Regenerate kubelet .pem Certificates
+## Regenerate `kubelet .pem` Certificates
 
 1. Backup certificates for `kubelet` on each master and worker node:
 
@@ -391,14 +391,14 @@ Run the following steps on each master node.
 
 4. Log into each node one at a time and run the following commands:
 
-   1. systemctl stop kubelet.service
-   2. rm /etc/kubernetes/kubelet.conf
-   3. rm /var/lib/kubelet/pki/*
-   4. cp /etc/kubernetes/`<node>`.kubelet.conf /etc/kubernetes/kubelet.conf
-   5. systemctl start kubelet.service
-   6. kubeadm init phase kubelet-finalize all --cert-dir /var/lib/kubelet/pki/
+   1. `systemctl stop kubelet.service`
+   2. `rm /etc/kubernetes/kubelet.conf`
+   3. `rm /var/lib/kubelet/pki/*`
+   4. `cp /etc/kubernetes/<NODE>.kubelet.conf /etc/kubernetes/kubelet.conf`
+   5. `systemctl start kubelet.service`
+   6. `kubeadm init phase kubelet-finalize all --cert-dir /var/lib/kubelet/pki/`
 
-5. Check the expiration of the kubectl certificates files. See [File Locations](#file-locations) for the list of files.
+5. Check the expiration of the `kubectl` certificates files. See [File Locations](#file-locations) for the list of files.
 
    ***This task is for each master and worker node. The example checks each kubelet certificate in [File Locations](#file-locations).***
 
@@ -408,7 +408,7 @@ Run the following steps on each master node.
 
    Example output:
 
-   ```
+   ```text
    /var/lib/kubelet/pki/kubelet.crt
    notAfter=Sep 22 17:37:30 2022 GMT
    /var/lib/kubelet/pki/kubelet-client-2021-09-22-18-37-30.pem

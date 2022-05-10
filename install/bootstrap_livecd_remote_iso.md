@@ -12,19 +12,17 @@ lack of removable storage.
 
 ## Topics
 
-- [Bootstrap PIT Node from LiveCD Remote ISO](#bootstrap-pit-node-from-livecd-remote-iso)
-  - [Topics](#topics)
-  - [1. Known Compatibility Issues](#1-known-compatibility-issues)
-  - [2. Attaching and Booting the LiveCD with the BMC](#2-attaching-and-booting-the-livecd-with-the-bmc)
-  - [3. First Login](#3-first-login)
-  - [4. Configure the Running LiveCD](#4-configure-the-running-livecd)
-    - [4.1 Generate Installation Files](#41-generate-installation-files)
-      - [4.1.a Subsequent Installs (Reinstalls)](#41a-subsequent-installs-reinstalls)
-      - [4.1.b Initial Installs (bare-metal)](#41b-initial-installs-bare-metal)
-    - [4.2 Verify and Backup `system_config.yaml`](#42-verify-and-backup-system_configyaml)
-    - [4.3 Prepare Site Init](#43-prepare-site-init)
-  - [5. Bring-up the PIT Services and Validate PIT Health](#5-bring-up-the-pit-services-and-validate-pit-health)
-  - [Next Topic](#next-topic)
+1. [Known Compatibility Issues](#known-compatibility-issues)
+1. [Attaching and Booting the LiveCD with the BMC](#attaching-and-booting-the-livecd-with-the-bmc)
+1. [First Login](#first-login)
+1. [Configure the Running LiveCD](#configure-the-running-livecd)
+   1. [Generate Installation Files](#generate-installation-files)
+      * [Subsequent Installs (Reinstalls)](#subsequent-fresh-installs-re-installs)
+      * [Initial Installs (bare-metal)](#first-timeinitial-installs-bare-metal)
+   1. [Verify and Backup `system_config.yaml`](#verify-csi-versions-match)
+   1. [Prepare Site Init](#prepare-site-init)
+1. [Bring-up the PIT Services and Validate PIT Health](#bring---up-the-pit-services-and-validate-pit-health)
+1. [Next Topic](#next-topic)
 
 <a name="known-compatibility-issues"></a>
 
@@ -287,7 +285,7 @@ On first login (over SSH or at local console) the LiveCD will prompt the adminis
 
 1. Mount local disk.
 
-   > **Note:** The FSLabel `PITDATA` is already in `/etc/fstab`, so the path is omitted in the following call to `mount`.
+   > **Note:** The `FSLabel` value `PITDATA` is already in `/etc/fstab`, so the path is omitted in the following call to `mount`.
 
    ```bash
    pit# mount -vL PITDATA &&
@@ -584,16 +582,16 @@ and [Configuration Payload Files](prepare_configuration_payload.md#configuration
 
 1. Copy the new `system_config.yaml` file somewhere safe to facilitate re-installs.
 
-1. Continue to the next step to [Prepare Site Init](#prepare-site-init).
+1. Continue to the next step to [Prepare `site-init`](#prepare-site-init).
 
 <a name="prepare-site-init"></a>
 
-### 4.3 Prepare Site Init
+### 4.3 Prepare `site-init`
 
 > **Important:** Although the command prompts in this procedure are `linux#`, the procedure should be
 > performed on the PIT node.
 
-Prepare the `site-init` directory by performing the [Prepare Site Init](prepare_site_init.md) procedures.
+Prepare the `site-init` directory by performing the [Prepare `site-init`](prepare_site_init.md) procedures.
 
 <a name="bring---up-the-pit-services-and-validate-pit-health"></a>
 
