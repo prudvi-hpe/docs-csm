@@ -1,12 +1,14 @@
 # Kubernetes and Bare Metal EtcD Certificate Renewal
 
-As part of the installation, Kubernetes generates certificates for the required subcomponents. This document will help walk through the process of renewing the certificates.
+As part of the installation, Kubernetes generates certificates for the required subcomponents.
+This document will help walk through the process of renewing the certificates.
 
 **IMPORTANT:**
 
 * Depending on the version of Kubernetes, the command may or may not reside under the `alpha` category. Use `kubectl certs --help` and `kubectl alpha certs --help` to determine this. The overall command syntax should be the same and this is just whether or not the command structure will require `alpha` in it.
 * The node referenced in this document as `ncn-m` is the master node selected to renew the certificates on.
-* This document is based off a base hardware configuration of three master nodes and three worker nodes. Utility storage nodes are not mentioned because they are not running Kubernetes. Please make sure to update any commands that run on multiple nodes accordingly.
+* This document is based off a base hardware configuration of three master nodes and three worker nodes. Utility storage nodes are not mentioned because they are not running Kubernetes.
+  Please make sure to update any commands that run on multiple nodes accordingly.
 
 ## File Locations
 
@@ -273,12 +275,13 @@ Run the following steps on each master node.
    notAfter=Sep  4 17:01:38 2022 GMT
    ```
 
-   **IMPORTANT:** Do **NOT** forget to verify certificates in /etc/kubernetes/pki/etcd.
-   * As noted in the above output, all certificates including those for etcd were updated. Please note `apiserver-etcd-client.crt` is a Kubernetes api cert not an etcd only cert. Also, the `/var/lib/kubelet/pki/` certificates will be updated in the Kubernetes client section that follows.
+   **IMPORTANT:** Do **NOT** forget to verify certificates in `/etc/kubernetes/pki/etcd`.
+   * As noted in the above output, all certificates including those for etcd were updated. Please note `apiserver-etcd-client.crt` is a Kubernetes API certificate not an etcd only certificate.
+   Also, the `/var/lib/kubelet/pki/` certificates will be updated in the Kubernetes client section that follows.
 
 1. Restart `etcd`.
 
-   Once the steps to renew the needed certs have been completed on all the master nodes, log into each master node one at a time and run the following:
+   Once the steps to renew the needed certificates have been completed on all the master nodes, log into each master node one at a time and run the following:
 
    ```bash
    ncn-m# systemctl restart etcd.service
@@ -298,7 +301,8 @@ Run the following steps on each master node.
 
 1. Fix `kubectl` command access.
 
-   **NOTE:** The following command will only respond with Unauthorized if certificates have expired. In any case, the new client certificates will need to be distributed in the following steps.
+   **NOTE:** The following command will only respond with Unauthorized if certificates have expired.
+   In any case, the new client certificates will need to be distributed in the following steps.
 
    1. View the status of the nodes.
 

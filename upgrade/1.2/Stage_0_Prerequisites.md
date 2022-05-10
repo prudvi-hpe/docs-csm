@@ -69,11 +69,16 @@ Stage 0 has several critical procedures which prepares and verify if the environ
 
 ### Abstract
 
-CSM 1.2 introduces the bifurcated CAN as well as network configuration controlled by data in SLS. An offline upgrade of SLS data is performed. More details on the upgrade and its sequence of events can be found in the [`README.SLS_upgrade.md`](./scripts/sls/README.SLS_Upgrade.md).
+CSM 1.2 introduces the bifurcated CAN as well as network configuration controlled by data in SLS. An offline upgrade of SLS data is performed.
+More details on the upgrade and its sequence of events can be found in the [`README.SLS_upgrade.md`](./scripts/sls/README.SLS_Upgrade.md).
 
-The SLS data upgrade is a critical step in moving to CSM 1.2. Upgraded SLS data is used in DNS and management network configuration. Details of Bifurcated CAN can be found in the [BICAN document](../../operations/network/management_network/index.md) to aid in understanding and decision-making.
+The SLS data upgrade is a critical step in moving to CSM 1.2. Upgraded SLS data is used in DNS and management network configuration.
+Details of Bifurcated CAN can be found in the [BICAN document](../../operations/network/management_network/index.md) to aid in understanding and decision-making.
 
-One detail which must not be overlooked is that the existing Customer Access Network (CAN) will be migrated or retrofitted into the new Customer Management Network (CMN) while minimizing changes. A new CAN, (or CHN) network is then created. Pivoting the existing CAN to the new CMN allows administrative traffic (already on the CAN) to remain as-is while moving standard user traffic to a new site-routable network.
+One detail which must not be overlooked is that the existing Customer Access Network (CAN) will
+be migrated or retrofitted into the new Customer Management Network (CMN) while minimizing changes.
+A new CAN, (or CHN) network is then created. Pivoting the existing CAN to the new CMN allows administrative
+traffic (already on the CAN) to remain as-is while moving standard user traffic to a new site-routable network.
 
 > **`Important:`** If this is the first time performing the SLS update to CSM 1.2, you should review the [`README.SLS_upgrade.md`](./scripts/sls/README.SLS_Upgrade.md) to ensure you use all the correct options for your environment. Two examples are given below. To see all options from the update script run `./sls_updater_csm_1.2.py --help`
 
@@ -121,7 +126,9 @@ One detail which must not be overlooked is that the existing Customer Access Net
                          --preserve-existing-subnet-for-cmn external-dns
    ```
 
-* **`Note:`**: A detailed review of the migrated/upgraded data (using `vimdiff` or otherwise) for production systems and for systems which have many add-on components (UAN, login nodes, storage integration points, etc.) is strongly recommended. Particularly, ensure that subnet reservations are correct in order to prevent any data mismatches.
+* **`Note:`**: A detailed review of the migrated/upgraded data (using `vimdiff` or otherwise)
+  for production systems and for systems which have many add-on components (UAN, login nodes, storage integration points, etc.)
+  is strongly recommended. Particularly, ensure that subnet reservations are correct in order to prevent any data mismatches.
 
 ### Upload migrated SLS file to SLS service
 
@@ -150,7 +157,8 @@ One detail which must not be overlooked is that the existing Customer Access Net
    ##################################################################################
    ```
 
-   * If you see text like the above, then it means that the switches have a CANU-generated configuration for CSM 1.2 in place. In this case, follow the steps in the [Management Network 1.0 (1.2 Pre-configuration) to 1.2](https://github.com/Cray-HPE/docs-csm/blob/release/1.2/operations/network/management_network/1.0_to_1.2_upgrade.md).
+   * If you see text like the above, then it means that the switches have a CANU-generated configuration for CSM 1.2 in place.
+     In this case, follow the steps in the [Management Network 1.0 (1.2 Pre-configuration) to 1.2](https://github.com/Cray-HPE/docs-csm/blob/release/1.2/operations/network/management_network/1.0_to_1.2_upgrade.md).
 
    * If the banner does NOT contain text like the above, then contact support in order to get the 1.2 pre-configuration applied to the system.
 
@@ -190,7 +198,9 @@ One detail which must not be overlooked is that the existing Customer Access Net
    ncn-m001# /usr/share/doc/csm/upgrade/1.2/scripts/upgrade/prerequisites.sh --csm-version [CSM_RELEASE]
    ```
 
-   **`IMPORTANT:`** If any errors are encountered, then potential fixes should be displayed where the error occurred. **IF** the upgrade `prerequisites.sh` script fails and does not provide guidance, then try rerunning it. If the failure persists, then open a support ticket for guidance before proceeding.
+   **`IMPORTANT:`** If any errors are encountered, then potential fixes should be displayed where the error occurred.
+   **IF** the upgrade `prerequisites.sh` script fails and does not provide guidance, then try rerunning it.
+   If the failure persists, then open a support ticket for guidance before proceeding.
 
 1. Unset the `NEXUS_PASSWORD` variable, if it was set in the earlier step.
 
@@ -200,8 +210,9 @@ One detail which must not be overlooked is that the existing Customer Access Net
 
 1. Commit changes to `customizations.yaml` (optional).
 
-   `customizations.yaml` has been updated in this procedure. If [using an external Git repository for managing customizations](../../install/prepare_site_init.md#version-control-site-init-files) as recommended,
-then clone a local working tree and commit appropriate changes to `customizations.yaml`.
+   `customizations.yaml` has been updated in this procedure.
+   If [using an external Git repository for managing customizations](../../install/prepare_site_init.md#version-control-site-init-files) as recommended,
+   then clone a local working tree and commit appropriate changes to `customizations.yaml`.
 
    For example:
 
@@ -218,7 +229,11 @@ then clone a local working tree and commit appropriate changes to `customization
 
 ## Stage 0.5 - Backup Workload Manager Data
 
-To prevent any possibility of losing Workload Manager configuration data or files, a back-up is required. Please execute all Backup procedures (for the Workload Manager in use) located in the `Troubleshooting and Administrative Tasks` sub-section of the `Install a Workload Manager` section of the `HPE Cray Programming Environment Installation Guide: CSM on HPE Cray EX`. The resulting backup data should be stored in a safe location off of the system.
+To prevent any possibility of losing Workload Manager configuration data or files, a back-up is required.
+Please execute all Backup procedures (for the Workload Manager in use) located in the
+`Troubleshooting and Administrative Tasks` sub-section of the `Install a Workload Manager` section of the
+`HPE Cray Programming Environment Installation Guide: CSM on HPE Cray EX`.
+The resulting backup data should be stored in a safe location off of the system.
 
 <a name="stage_completed"></a>
 

@@ -15,7 +15,7 @@ These steps provide a bootable USB with SSH enabled, capable of installing this 
       * [Subsequent Installs (Reinstalls)](#subsequent-fresh-installs-re-installs)
       * [Initial Installs (bare-metal)](#first-timeinitial-installs-bare-metal)
    1. [Verify and Backup `system_config.yaml`](#verify-csi-versions-match)
-   1. [Prepare Site Init](#prepare-site-init)
+   1. [Prepare `site-init`](#prepare-site-init)
 1. [Prepopulate LiveCD Daemons Configuration and NCN Artifacts](#prepopulate-livecd-daemons-configuration-and-ncn-artifacts)
 1. [Boot the LiveCD](#boot-the-livecd)
    1. [First Login](#first-login)
@@ -148,7 +148,7 @@ Fetch the base installation CSM tarball, extract it, and install the contained C
 
 1. Remove CNI configuration from prior install
 
-    If you are reinstalling the system and you are **using ncn-m001 to prepare the USB image**, remove some of prior CNI configuration.
+    If you are reinstalling the system and you are **using `ncn-m001` to prepare the USB image**, remove some of prior CNI configuration.
 
     ```bash
     ncn-m001# rm -rf /etc/cni/net.d/00-multus.conf /etc/cni/net.d/10-*.conflist /etc/cni/net.d/multus.d
@@ -298,7 +298,7 @@ information for this system has not yet been prepared.
 #### 3.1.a Subsequent Installs (Reinstalls)
 
 1. **For subsequent fresh-installs (re-installs) where the `system_config.yaml` parameter file is available**, generate the updated system configuration
-   (see [Cray Site Init Files](../background/index.md#cray_site_init_files)).
+   (see [Cray `site-init` Files](../background/index.md#cray_site_init_files)).
 
    > **Warning:** If the `system_config.yaml` file is unavailable, then skip this step and proceed to [Initial Installs (bare-metal)](#first-timeinitial-installs-bare-metal).
 

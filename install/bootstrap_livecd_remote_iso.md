@@ -20,7 +20,7 @@ lack of removable storage.
       * [Subsequent Installs (Reinstalls)](#subsequent-fresh-installs-re-installs)
       * [Initial Installs (bare-metal)](#first-timeinitial-installs-bare-metal)
    1. [Verify and Backup `system_config.yaml`](#verify-csi-versions-match)
-   1. [Prepare Site Init](#prepare-site-init)
+   1. [Prepare `site-init`](#prepare-site-init)
 1. [Bring-up the PIT Services and Validate PIT Health](#bring---up-the-pit-services-and-validate-pit-health)
 1. [Next Topic](#next-topic)
 
@@ -40,7 +40,7 @@ The LiveCD Remote ISO has known compatibility issues for nodes from certain vend
 > **Warning:** If this is a re-installation on a system that still has a USB device from a prior
 > installation, then that USB device must be wiped before continuing. Failing to wipe the USB, if present, may result in confusion.
 > If the USB is still booted, then it can wipe itself using the [basic wipe from Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
-> If it is not booted, please do so and wipe it _or_ disable the USB ports in the BIOS (not available for all vendors).
+> If it is not booted, please do so and wipe it or disable the USB ports in the BIOS (not available for all vendors).
 
 Obtain and attach the LiveCD `cray-pre-install-toolkit` ISO file to the BMC. Depending on the vendor of the node,
 the instructions for attaching to the BMC will differ.
@@ -418,7 +418,7 @@ and [Configuration Payload Files](prepare_configuration_payload.md#configuration
 #### 4.1.a Subsequent Installs (Reinstalls)
 
 1. **For subsequent fresh-installs (re-installs) where the `system_config.yaml` parameter file is available**, generate the updated system configuration
-   (see [Cray Site Init Files](../background/index.md#cray_site_init_files)).
+   (see [Cray `site-init` Files](../background/index.md#cray_site_init_files)).
 
    > **Warning:** If the `system_config.yaml` file is unavailable, then skip this step and proceed to [Initial Installs (bare-metal)](#first-timeinitial-installs-bare-metal).
 

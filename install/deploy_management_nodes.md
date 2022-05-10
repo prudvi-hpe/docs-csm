@@ -212,8 +212,8 @@ firmware requirement before starting.
    both been installed and configured. However, at that point a rolling reboot procedure for the management nodes will be needed,
    after the firmware has been updated.
 
-   See the 1.5 _HPE Cray EX System Software Getting Started Guide S-8000_
-   on the [HPE Customer Support Center](https://www.hpe.com/support/ex-gsg) for information about the _HPE Cray EX HPC Firmware Pack_ (HFP) product.
+   See the 1.5_HPE Cray EX System Software Getting Started Guide `S-8000`_
+   on the [HPE Customer Support Center](https://www.hpe.com/support/ex-gsg) for information about the_HPE Cray EX HPC Firmware Pack (HFP)_ product.
 
    In the HFP documentation there is information about the recommended firmware packages to be installed.
    See "Product Details" in the HPE Cray EX HPC Firmware Pack Installation Guide.
