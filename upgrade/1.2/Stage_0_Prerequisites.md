@@ -4,7 +4,12 @@
 
 ## Abstract
 
-Stage 0 has several critical procedures which prepares and verify if the environment is ready for upgrade. First, the latest docs RPM is installed; it includes critical install scripts used in the upgrade procedure. Next, the current configuration of the System Layout Service (SLS) is updated to have necessary information for CSM 1.2. The management network configuration is also upgraded. Towards the end, prerequisite checks are performed to ensure that the upgrade is ready to proceed. Finally, a backup of Workload Manager configuration data and files is created. Once complete, the upgrade proceeds to Stage 1.
+Stage 0 has several critical procedures which prepares and verify if the environment is ready for upgrade.
+First, the latest docs RPM is installed; it includes critical install scripts used in the upgrade procedure.
+Next, the current configuration of the System Layout Service (SLS) is updated to have necessary information for CSM 1.2.
+The management network configuration is also upgraded. Towards the end, prerequisite checks are performed to ensure that the upgrade is ready to proceed.
+Finally, a backup of Workload Manager configuration data and files is created.
+Once complete, the upgrade proceeds to Stage 1.
 
 **Stages:**
 
@@ -67,7 +72,7 @@ Stage 0 has several critical procedures which prepares and verify if the environ
 
 ## Stage 0.2 - Update SLS
 
-### Abstract
+### Abstract Stage 0.2
 
 CSM 1.2 introduces the bifurcated CAN as well as network configuration controlled by data in SLS. An offline upgrade of SLS data is performed.
 More details on the upgrade and its sequence of events can be found in the [`README.SLS_upgrade.md`](./scripts/sls/README.SLS_Upgrade.md).
@@ -80,7 +85,9 @@ be migrated or retrofitted into the new Customer Management Network (CMN) while 
 A new CAN, (or CHN) network is then created. Pivoting the existing CAN to the new CMN allows administrative
 traffic (already on the CAN) to remain as-is while moving standard user traffic to a new site-routable network.
 
-> **`Important:`** If this is the first time performing the SLS update to CSM 1.2, you should review the [`README.SLS_upgrade.md`](./scripts/sls/README.SLS_Upgrade.md) to ensure you use all the correct options for your environment. Two examples are given below. To see all options from the update script run `./sls_updater_csm_1.2.py --help`
+> **`Important:`** If this is the first time performing the SLS update to CSM 1.2,
+> you should review the [`README.SLS_upgrade.md`](./scripts/sls/README.SLS_Upgrade.md) to ensure you use all the correct options for your environment.
+> Two examples are given below. To see all options from the update script run `./sls_updater_csm_1.2.py --help`
 
 ### Retrieve SLS data as JSON
 

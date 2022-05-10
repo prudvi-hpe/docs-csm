@@ -149,7 +149,7 @@ the Kubernetes cluster as the final of three master nodes, forming a quorum.
 
     1. Run the `export` commands listed at the end of the output from the previous step.
 
-1. <a name="csi-handoff-bss-metadata"></a>Upload the `data.json` file to BSS, our Kubernetes `cloud-init` DataSource.
+1. <a name="csi-handoff-bss-metadata"></a> Upload the `data.json` file to BSS, our Kubernetes `cloud-init` Data Source.
 
     **If any changes have been made** to this file (for example, as a result of any customizations or workarounds), use the path to that file instead. This step will prompt for the root password of the NCNs.
 
@@ -200,7 +200,7 @@ the Kubernetes cluster as the final of three master nodes, forming a quorum.
 
     > **NOTE:** This denotes information that should always be kept together in order to fresh-install the system again.
 
-    1. Log in; setup passwordless SSH _to_ the PIT node by copying ONLY the public keys from `ncn-m002` and `ncn-m003` to the PIT (**do not setup passwordless SSH _from_ the PIT** or the key will have to be securely tracked or expunged if using a USB installation).
+    1. Log in; setup passwordless SSH to the PIT node by copying ONLY the public keys from `ncn-m002` and `ncn-m003` to the PIT (**do not setup passwordless SSH _from_ the PIT** or the key will have to be securely tracked or expunged if using a USB installation).
 
         > The `ssh` commands below may prompt for the NCN root password.
 
