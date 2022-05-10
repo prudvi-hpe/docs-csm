@@ -42,7 +42,7 @@ and ready for reboot of the LiveCD:
 >
 > * SSH will cease to work when the LiveCD reboots; the serial console will need to be used.
 >
-> * Rebooting a remote ISO will dump all running changes on the PIT node; USBs are accessible after the install.
+> * Rebooting a remote ISO will dump all running changes on the PIT node; USB drives are accessible after the install.
 >
 > * The NCN **will never wipe a USB device** during installation.
 >
